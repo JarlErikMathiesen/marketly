@@ -16,7 +16,7 @@ const Logo = styled.img`
   height: 24px;
   cursor: pointer;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     height: 18px;
   }
 `;
@@ -27,7 +27,7 @@ const CartIcon = styled(ShoppingCart)`
   height: 40px;
   cursor: pointer;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 20px;
     height: 20px;
   }

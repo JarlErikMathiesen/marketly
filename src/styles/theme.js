@@ -3,7 +3,6 @@ export const theme = {
     body: "'Roboto', Arial, sans-serif",
     heading: "'Roboto', Arial, sans-serif",
   },
-
   colors: {
     background: '#2c2c2c',
     gold: '#ffd700',
@@ -14,8 +13,9 @@ export const theme = {
     l: '24px',
   },
   breakpoints: {
-    mobile: '480px',
-    tablet: '768px',
-    desktop: '1024px',
+    sm: '480px',
+    md: '640px',
+    lg: '768px',
+    xl: '1024px',
   },
 };

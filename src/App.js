@@ -12,14 +12,55 @@ function calculateDiscount(price, discountedPrice) {
 const Card = styled.div`
   border-radius: 20px;
   border: 3px solid #ddd;
-  padding: 16px;
   margin-bottom: 16px;
+  max-width: 300px;
+  min-width: 150px;
+`;
+
+const CardText = styled.div`
+  padding: 16px;
+`;
+
+const CardImage = styled.img`
+  border-radius: 15px;
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: 14rem;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    height: 16rem;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    height: 20rem;
+  }
 `;
 
 const Grid = styled.div`
+  margin: 3rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: ${({ theme }) => theme.spacing.l};
+  gap: 1rem;
+  grid-template-columns: 1fr; /* mobile default */
+  justify-self: center;
+
+  /* sm: ≥ 640px → 2 columns */
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* md: ≥ 768px → 3 columns */
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* xl: ≥ 1280px → 4 columns */
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 function App() {
@@ -68,32 +109,38 @@ function App() {
         <Grid>
           {products.data.map((product) => (
             <Card key={product.id}>
-              <img src={product.image.url} style={{ height: '100px' }} />
-              <h2>{product.title}</h2>
-              {product.price !== product.discountedPrice ? (
-                <div>
-                  <span
-                    style={{ textDecoration: 'line-through', opacity: 0.6 }}
-                  >
-                    {product.price}
-                  </span>
-                  <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>
-                    {product.discountedPrice}
-                  </span>
-                  <span
-                    style={{
-                      marginLeft: '8px',
-                      fontWeight: 'bold',
-                      color: 'green',
-                    }}
-                  >
-                    -{calculateDiscount(product.price, product.discountedPrice)}
-                    %
-                  </span>
-                </div>
-              ) : (
-                <p>{product.price}</p>
-              )}
+              <CardImage src={product.image.url} />
+              <CardText>
+                <h2>{product.title}</h2>
+                {product.price !== product.discountedPrice ? (
+                  <div>
+                    <span
+                      style={{ textDecoration: 'line-through', opacity: 0.6 }}
+                    >
+                      {product.price}
+                    </span>
+                    <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>
+                      {product.discountedPrice}
+                    </span>
+                    <span
+                      style={{
+                        marginLeft: '8px',
+                        fontWeight: 'bold',
+                        color: 'green',
+                      }}
+                    >
+                      -
+                      {calculateDiscount(
+                        product.price,
+                        product.discountedPrice
+                      )}
+                      %
+                    </span>
+                  </div>
+                ) : (
+                  <p>{product.price}</p>
+                )}
+              </CardText>
             </Card>
           ))}
         </Grid>
