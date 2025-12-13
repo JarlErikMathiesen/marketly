@@ -9,6 +9,7 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   position: sticky;
+  z-index: 10;
   top: 0;
 `;
 
