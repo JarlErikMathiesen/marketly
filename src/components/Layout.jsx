@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { ShoppingCart } from 'lucide-react';
 import logo from '../assets/images/logo/marketly.svg';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   background-color: ${({ theme }) => theme.colors.background};
@@ -40,8 +42,19 @@ const Nav = styled.nav`
   gap: ${({ theme }) => theme.spacing.l};
 `;
 
-const NavContacts = styled.h2`
+const NavItem = styled(NavLink)`
   color: ${({ theme }) => theme.colors.gold};
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  &.active {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    color: white;
+  }
 `;
 
 const FooterWrapper = styled.footer`
@@ -63,9 +76,12 @@ const Main = styled.main`
 function Header() {
   return (
     <HeaderWrapper>
-      <Logo src={logo} alt="marketly logo" />
+      <Link to="/">
+        <Logo src={logo} alt="marketly logo" />
+      </Link>
       <Nav>
-        <NavContacts>Contact</NavContacts>
+        <NavItem to="/">Home</NavItem>
+        <NavItem to="/contact">Contact</NavItem>
         <CartIcon />
       </Nav>
     </HeaderWrapper>
