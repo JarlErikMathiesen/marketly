@@ -7,6 +7,7 @@ import {
   CardText,
   DiscountBadge,
 } from '../Cards';
+import { fetchProducts } from '../api/products';
 
 const url = 'https://v2.api.noroff.dev/online-shop';
 
@@ -62,9 +63,8 @@ export function Home() {
         setIsLoading(true);
         setIsError(false);
 
-        const response = await fetch(url);
-        const json = await response.json();
-        setProducts(json);
+        const data = await fetchProducts();
+        setProducts(data);
       } catch {
         setIsError(true);
       } finally {

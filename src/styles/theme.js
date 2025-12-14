@@ -6,6 +6,7 @@ export const theme = {
   colors: {
     background: '#2c2c2c',
     gold: '#ffd700',
+    error: '#c0392b',
   },
   spacing: {
     s: '8px',
