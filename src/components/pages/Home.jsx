@@ -8,6 +8,7 @@ import {
   DiscountBadge,
 } from '../Cards';
 import { fetchProducts } from '../api/products';
+import { Link } from 'react-router-dom';
 
 const url = 'https://v2.api.noroff.dev/online-shop';
 
@@ -81,27 +82,33 @@ export function Home() {
   return (
     <Grid>
       {products.data.map((product) => (
-        <Card key={product.id}>
-          <CardImageWrapper>
-            <CardImage src={product.image.url} />
-            {product.price !== product.discountedPrice && (
-              <DiscountBadge>
-                -{calculateDiscount(product.price, product.discountedPrice)}%
-              </DiscountBadge>
-            )}
-          </CardImageWrapper>
-          <CardText>
-            <h2>{product.title}</h2>
-            {product.price !== product.discountedPrice ? (
-              <PriceContainer>
-                <OldPrice>{product.price} kr</OldPrice>
-                <ProductPrice>{product.discountedPrice} kr</ProductPrice>
-              </PriceContainer>
-            ) : (
-              <ProductPrice>{product.price} kr</ProductPrice>
-            )}
-          </CardText>
-        </Card>
+        <Link
+          key={product.id}
+          to={`/product/${product.id}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <Card key={product.id}>
+            <CardImageWrapper>
+              <CardImage src={product.image.url} />
+              {product.price !== product.discountedPrice && (
+                <DiscountBadge>
+                  -{calculateDiscount(product.price, product.discountedPrice)}%
+                </DiscountBadge>
+              )}
+            </CardImageWrapper>
+            <CardText>
+              <h2>{product.title}</h2>
+              {product.price !== product.discountedPrice ? (
+                <PriceContainer>
+                  <OldPrice>{product.price} kr</OldPrice>
+                  <ProductPrice>{product.discountedPrice} kr</ProductPrice>
+                </PriceContainer>
+              ) : (
+                <ProductPrice>{product.price} kr</ProductPrice>
+              )}
+            </CardText>
+          </Card>
+        </Link>
       ))}
     </Grid>
   );
