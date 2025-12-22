@@ -42,7 +42,7 @@ export const DiscountBadge = styled.span`
   position: absolute;
   top: 10px;
   right: 10px;
-  background: green;
+  background: ${({ theme }) => theme.colors.discount};
   color: white;
   padding: 5px 10px;
   border-radius: 20px;
