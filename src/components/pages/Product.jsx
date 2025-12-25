@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useTheme } from 'styled-components';
+import { useCart } from '../../context/CartContext';
 
 const BASE_URL = 'https://v2.api.noroff.dev/online-shop';
 
@@ -176,6 +177,7 @@ export function Product() {
   const [isError, setIsError] = useState(false);
   const { id } = useParams();
   const theme = useTheme();
+  const { addItem } = useCart();
 
   useEffect(() => {
     async function getData() {
@@ -227,7 +229,7 @@ export function Product() {
             <Description>{products.description}</Description>
           </DescriptionSection>
 
-          <AddToCartButton>
+          <AddToCartButton onClick={() => addItem(products)}>
             <ShoppingCart size={20} />
             Add to Cart
           </AddToCartButton>

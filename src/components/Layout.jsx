@@ -3,6 +3,7 @@ import { ShoppingCart } from 'lucide-react';
 import logo from '../assets/images/logo/marketly.svg';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const HeaderWrapper = styled.header`
   background-color: ${({ theme }) => theme.colors.background};
@@ -34,6 +35,30 @@ const CartIcon = styled(ShoppingCart)`
     width: 20px;
     height: 20px;
   }
+`;
+
+const CartIconWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+`;
+
+const CartBadge = styled.span`
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: ${({ theme }) => theme.colors.gold};
+  color: ${({ theme }) => theme.colors.background};
+  border-radius: 15px;
+  min-width: 18px;
+  height: 18px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 `;
 
 const Nav = styled.nav`
@@ -74,6 +99,8 @@ const Main = styled.main`
 `;
 
 function Header() {
+  const { totalQuantity } = useCart();
+
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -82,7 +109,12 @@ function Header() {
       <Nav>
         <NavItem to="/">Home</NavItem>
         <NavItem to="/contact">Contact</NavItem>
-        <CartIcon />
+        <Link to="/cart">
+          <CartIconWrapper>
+            <CartIcon />
+            {totalQuantity > 0 && <CartBadge>{totalQuantity}</CartBadge>}
+          </CartIconWrapper>
+        </Link>
       </Nav>
     </HeaderWrapper>
   );
