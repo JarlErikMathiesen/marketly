@@ -20,8 +20,9 @@ function cartReducer(state, action) {
         {
           id: product.id,
           title: product.title,
-          price: product.discountedPrice,
-          image: product.image?.url,
+          price: product.price,
+          discountedPrice: product.discountedPrice,
+          image: product.image,
           quantity: 1,
         },
       ];
@@ -70,6 +71,11 @@ export function CartProvider({ children }) {
     0
   );
 
+  const totalDiscountedPrice = cart.reduce(
+    (sum, item) => sum + item.discountedPrice * item.quantity,
+    0
+  );
+
   return (
     <CartContext.Provider
       value={{
@@ -79,6 +85,7 @@ export function CartProvider({ children }) {
         removeItem,
         totalQuantity,
         totalPrice,
+        totalDiscountedPrice,
       }}
     >
       {children}
