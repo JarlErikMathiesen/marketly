@@ -1,7 +1,10 @@
 import { useCart } from '../../context/CartContext';
 
 export function Cart() {
-  const { cart, addItem, decrementItem, removeItem } = useCart();
+  const { cart, addItem, decrementItem, removeItem, totalPrice } = useCart();
+  function formatPrice(value) {
+    return Number(value).toFixed(2);
+  }
 
   if (cart.length === 0) {
     return (
@@ -22,13 +25,14 @@ export function Cart() {
             <strong>{item.title}</strong>
             <div>Price: {item.price} kr</div>
             <div>Quantity: {item.quantity}</div>
-            <div>Subtotal: {item.price * item.quantity} kr</div>
+            <div>Subtotal: {formatPrice(item.price * item.quantity)} kr</div>
             <button onClick={() => addItem(item)}>+</button>
             <button onClick={() => decrementItem(item.id)}>-</button>
             <button onClick={() => removeItem(item.id)}>remove</button>
           </li>
         ))}
       </ul>
+      <h2>Total: {formatPrice(totalPrice)} kr</h2>
     </div>
   );
 }
