@@ -1,28 +1,18 @@
 import { useCart } from '../../context/CartContext';
 import styled from 'styled-components';
 import { Trash2 } from 'lucide-react';
+import { ProductDiscountBadge, CartItemCard, OrderSummaryCard } from '../Cards';
+import {
+  CheckoutButton,
+  QuantityButton,
+  RemoveButton,
+} from '../../styles/buttons';
+import { ProductPrice, OldPrice } from '../../styles/fonts';
 
 const CartContainer = styled.div`
   max-width: 800px;
   margin: 3rem auto;
   padding: 0 1rem;
-`;
-
-const CartItem = styled.div`
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: 100px 1fr auto;
-  gap: 1.5rem;
-  align-items: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: 80px 1fr;
-    gap: 1rem;
-  }
 `;
 
 const ProductImage = styled.img`
@@ -50,27 +40,7 @@ const PriceSection = styled.div`
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-`;
-
-const ProductPrice = styled.span`
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: ${({ theme }) => theme.colors.primary};
-`;
-
-const OldPrice = styled.span`
-  text-decoration: line-through;
-  opacity: 0.6;
-  font-size: 1rem;
-`;
-
-const DiscountBadge = styled.span`
-  background: ${({ theme }) => theme.colors.discount};
-  color: white;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 0.75rem;
+  font-size: 20px;
 `;
 
 const QuantityControl = styled.div`
@@ -84,30 +54,6 @@ const QuantityLabel = styled.span`
   font-size: 0.9rem;
   color: #666;
   margin-right: 0.5rem;
-`;
-
-const QuantityButton = styled.button`
-  background: white;
-  border: 1px solid #ddd;
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.2s;
-
-  &:hover {
-    background: #f5f5f5;
-    border-color: #999;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
 `;
 
 const QuantityDisplay = styled.span`
@@ -144,30 +90,6 @@ const SubtotalPrice = styled.div`
   font-size: 1.3rem;
 `;
 
-const RemoveButton = styled.button`
-  background: none;
-  border: none;
-  color: #e74c3c;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  transition: color 0.2s;
-
-  &:hover {
-    color: #c0392b;
-  }
-`;
-
-const OrderSummary = styled.div`
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  margin-top: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-`;
-
 const SummaryTitle = styled.h2`
   font-size: 1.3rem;
   margin: 0 0 1.5rem 0;
@@ -201,25 +123,6 @@ const Divider = styled.hr`
 const TotalRow = styled(SummaryRow)`
   font-size: 1.3rem;
   font-weight: bold;
-`;
-
-const CheckoutButton = styled.button`
-  width: 100%;
-  background: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.gold};
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  margin-top: 1.5rem;
-  transition: background 0.3s;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.gold};
-    color: ${({ theme }) => theme.colors.background};
-  }
 `;
 
 const EmptyCart = styled.div`
@@ -266,7 +169,7 @@ export function Cart() {
   return (
     <CartContainer>
       {cart.map((item) => (
-        <CartItem key={item.id}>
+        <CartItemCard key={item.id}>
           <ProductImage src={item.image?.url} alt={item.title} />
 
           <ProductDetails>
@@ -278,9 +181,9 @@ export function Cart() {
               {item.price !== item.discountedPrice && (
                 <>
                   <OldPrice>{formatPrice(item.price)} kr</OldPrice>
-                  <DiscountBadge>
+                  <ProductDiscountBadge>
                     {calculateDiscount(item.price, item.discountedPrice)}% OFF
-                  </DiscountBadge>
+                  </ProductDiscountBadge>
                 </>
               )}
             </PriceSection>
@@ -309,10 +212,10 @@ export function Cart() {
               Remove
             </RemoveButton>
           </ItemRight>
-        </CartItem>
+        </CartItemCard>
       ))}
 
-      <OrderSummary>
+      <OrderSummaryCard>
         <SummaryTitle>Order summary</SummaryTitle>
         <SummaryRow>
           <SummaryLabel>Subtotal</SummaryLabel>
@@ -330,7 +233,7 @@ export function Cart() {
           <SummaryValue>{formatPrice(totalDiscountedPrice)} kr</SummaryValue>
         </TotalRow>
         <CheckoutButton>Proceed to checkout</CheckoutButton>
-      </OrderSummary>
+      </OrderSummaryCard>
     </CartContainer>
   );
 }

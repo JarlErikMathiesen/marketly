@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
-  Card,
+  HomeCard,
   CardImage,
   CardImageWrapper,
   CardText,
@@ -9,8 +9,7 @@ import {
 } from '../Cards';
 import { fetchProducts } from '../api/products';
 import { Link } from 'react-router-dom';
-
-const url = 'https://v2.api.noroff.dev/online-shop';
+import { ProductPrice, OldPrice } from '../../styles/fonts';
 
 const Grid = styled.div`
   margin: 3rem;
@@ -37,16 +36,7 @@ const PriceContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
-`;
-
-const ProductPrice = styled.span`
-  font-weight: bold;
   font-size: 25px;
-`;
-
-const OldPrice = styled(ProductPrice)`
-  text-decoration: line-through;
-  opacity: 0.6;
 `;
 
 function calculateDiscount(price, discountedPrice) {
@@ -87,7 +77,7 @@ export function Home() {
           to={`/product/${product.id}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          <Card key={product.id}>
+          <HomeCard key={product.id}>
             <CardImageWrapper>
               <CardImage src={product.image.url} />
               {product.price !== product.discountedPrice && (
@@ -107,7 +97,7 @@ export function Home() {
                 <ProductPrice>{product.price} kr</ProductPrice>
               )}
             </CardText>
-          </Card>
+          </HomeCard>
         </Link>
       ))}
     </Grid>

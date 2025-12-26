@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useTheme } from 'styled-components';
 import { useCart } from '../../context/CartContext';
+import { ProductDiscountBadge } from '../Cards';
+import { AddToCartButton } from '../../styles/buttons';
+import { ProductPrice, OldPrice } from '../../styles/fonts';
 
 const BASE_URL = 'https://v2.api.noroff.dev/online-shop';
 
@@ -52,27 +55,7 @@ const PriceSection = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-`;
-
-const ProductPrice = styled.span`
-  font-weight: bold;
-  font-size: 2rem;
-  color: ${({ theme }) => theme.colors.discount};
-`;
-
-const OldPrice = styled.span`
-  text-decoration: line-through;
-  opacity: 0.6;
-  font-size: 1.2rem;
-`;
-
-const DiscountBadge = styled.span`
-  background: ${({ theme }) => theme.colors.discount};
-  color: white;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 20px;
 `;
 
 const DescriptionSection = styled.div`
@@ -91,27 +74,6 @@ const Description = styled.p`
   margin: 0;
   color: #666;
   line-height: 1.6;
-`;
-
-const AddToCartButton = styled.button`
-  background: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.gold};
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: background 0.3s;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.gold};
-    color: ${({ theme }) => theme.colors.background};
-  }
 `;
 
 const ReviewsSection = styled.div`
@@ -216,10 +178,10 @@ export function Product() {
             {products.price !== products.discountedPrice && (
               <>
                 <OldPrice>{products.price} kr</OldPrice>
-                <DiscountBadge>
+                <ProductDiscountBadge>
                   {calculateDiscount(products.price, products.discountedPrice)}%
                   OFF
-                </DiscountBadge>
+                </ProductDiscountBadge>
               </>
             )}
           </PriceSection>

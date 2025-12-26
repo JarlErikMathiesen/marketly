@@ -1,12 +1,36 @@
 import styled from 'styled-components';
 
-export const Card = styled.div`
-  border-radius: 20px;
+export const BaseCard = styled.div`
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+export const HomeCard = styled(BaseCard)`
   margin-bottom: 16px;
   max-width: 300px;
   min-width: 150px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+`;
+
+export const CartItemCard = styled(BaseCard)`
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+  }
+`;
+
+export const OrderSummaryCard = styled(BaseCard)`
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `;
 
 export const CardText = styled.div`
@@ -47,4 +71,10 @@ export const DiscountBadge = styled.span`
   padding: 5px 10px;
   border-radius: 20px;
   font-weight: bold;
+`;
+
+export const ProductDiscountBadge = styled(DiscountBadge)`
+  position: relative;
+  top: 0px;
+  right: 0px;
 `;

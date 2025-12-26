@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import { SubmitButton } from '../../styles/buttons';
 
 const PageWrapper = styled.div`
   min-height: 100vh;
@@ -65,22 +66,6 @@ const ErrorMessage = styled.p`
   color: ${({ theme }) => theme.colors.error};
   font-size: 0.85rem;
   margin-top: 0.25rem;
-`;
-
-const SubmitButton = styled.button`
-  margin-top: 1rem;
-  padding: 0.9rem;
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.gold};
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.9;
-  }
 `;
 
 const schema = yup.object({
