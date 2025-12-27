@@ -8,6 +8,7 @@ import {
   RemoveButton,
 } from '../../styles/buttons';
 import { ProductPrice, OldPrice } from '../../styles/fonts';
+import { Link } from 'react-router-dom';
 
 const CartContainer = styled.div`
   max-width: 800px;
@@ -232,7 +233,9 @@ export function Cart() {
           <SummaryLabel>Total</SummaryLabel>
           <SummaryValue>{formatPrice(totalDiscountedPrice)} kr</SummaryValue>
         </TotalRow>
-        <CheckoutButton>Proceed to checkout</CheckoutButton>
+        <Link to="/checkoutsuccess">
+          <CheckoutButton>Proceed to checkout</CheckoutButton>
+        </Link>
       </OrderSummaryCard>
     </CartContainer>
   );

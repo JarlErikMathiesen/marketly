@@ -36,6 +36,7 @@ export const OrderSummaryCard = styled(BaseCard)`
 export const CardText = styled.div`
   display: grid;
   padding: 16px;
+  font-size: 25px;
 `;
 
 export const CardImageWrapper = styled.div`

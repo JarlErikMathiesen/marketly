@@ -36,7 +36,6 @@ const PriceContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
-  font-size: 25px;
 `;
 
 function calculateDiscount(price, discountedPrice) {

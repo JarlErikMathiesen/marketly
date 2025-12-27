@@ -6,6 +6,7 @@ import { Home } from './components/pages/Home';
 import { Product } from './components/pages/Product';
 import { CartProvider } from './context/CartContext';
 import { Cart } from './components/pages/Cart';
+import { CheckoutSuccess } from './components/pages/CheckoutSuccess';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/product/:id" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkoutsuccess" element={<CheckoutSuccess />} />
           </Routes>
         </Layout>
       </BrowserRouter>
