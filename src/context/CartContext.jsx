@@ -42,6 +42,10 @@ function cartReducer(state, action) {
       return state.filter((item) => item.id !== action.payload);
     }
 
+    case 'EMPTY_CART': {
+      return [];
+    }
+
     default:
       return state;
   }
@@ -64,6 +68,10 @@ export function CartProvider({ children }) {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
 
+  const emptyCart = () => {
+    dispatch({ type: 'EMPTY_CART' });
+  };
+
   const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const totalPrice = cart.reduce(
@@ -83,6 +91,7 @@ export function CartProvider({ children }) {
         addItem,
         decrementItem,
         removeItem,
+        emptyCart,
         totalQuantity,
         totalPrice,
         totalDiscountedPrice,

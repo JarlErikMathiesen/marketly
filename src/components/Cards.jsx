@@ -63,6 +63,12 @@ export const CardImage = styled.img`
   }
 `;
 
+export const CardSuccess = styled(BaseCard)`
+  padding: 20px;
+  display: grid;
+  justify-items: center;
+`;
+
 export const DiscountBadge = styled.span`
   position: absolute;
   top: 10px;

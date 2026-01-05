@@ -234,7 +234,9 @@ export function Cart() {
           <SummaryValue>{formatPrice(totalDiscountedPrice)} kr</SummaryValue>
         </TotalRow>
         <Link to="/checkoutsuccess">
-          <CheckoutButton>Proceed to checkout</CheckoutButton>
+          <CheckoutButton onClick={EmptyCart}>
+            Proceed to checkout
+          </CheckoutButton>
         </Link>
       </OrderSummaryCard>
     </CartContainer>
