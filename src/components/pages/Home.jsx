@@ -38,6 +38,45 @@ const PriceContainer = styled.div`
   margin-top: 8px;
 `;
 
+const SearchWrapper = styled.div`
+  grid-column: 1/5;
+  background-color: ${({ theme }) => theme.colors.background};
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 15px;
+  border-radius: 12px;
+  color: ${({ theme }) => theme.colors.gold};
+`;
+
+const SearchInput = styled.input`
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.gold};
+  }
+`;
+
+function SearchBar({ value, onChange }) {
+  return (
+    <SearchWrapper>
+      <label htmlFor="search-bar">Search</label>
+      <SearchInput
+        type="text"
+        id="search-bar"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Search products..."
+      />
+    </SearchWrapper>
+  );
+}
+
 function calculateDiscount(price, discountedPrice) {
   return Math.round(((price - discountedPrice) / price) * 100);
 }
@@ -46,6 +85,11 @@ export function Home() {
   const [products, setProducts] = useState({ data: [], meta: {} });
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredProducts = products.data.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     async function getData() {
@@ -70,13 +114,15 @@ export function Home() {
 
   return (
     <Grid>
-      {products.data.map((product) => (
+      <SearchBar value={searchTerm} onChange={setSearchTerm} />
+
+      {filteredProducts.map((product) => (
         <Link
           key={product.id}
           to={`/product/${product.id}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          <HomeCard key={product.id}>
+          <HomeCard>
             <CardImageWrapper>
               <CardImage src={product.image.url} />
               {product.price !== product.discountedPrice && (
@@ -85,6 +131,7 @@ export function Home() {
                 </DiscountBadge>
               )}
             </CardImageWrapper>
+
             <CardText>
               <h2>{product.title}</h2>
               {product.price !== product.discountedPrice ? (

@@ -48,7 +48,7 @@ export const CardImage = styled.img`
   width: 100%;
   height: 12rem;
   object-fit: cover;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 12px 12px 0px 0px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     height: 14rem;
