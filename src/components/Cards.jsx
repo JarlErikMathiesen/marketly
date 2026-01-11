@@ -10,6 +10,9 @@ export const HomeCard = styled(BaseCard)`
   margin-bottom: 16px;
   max-width: 300px;
   min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 export const CartItemCard = styled(BaseCard)`
@@ -34,9 +37,12 @@ export const OrderSummaryCard = styled(BaseCard)`
 `;
 
 export const CardText = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 16px;
   font-size: 25px;
+  flex-grow: 1;
 `;
 
 export const CardImageWrapper = styled.div`

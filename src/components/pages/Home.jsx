@@ -17,6 +17,7 @@ const Grid = styled.div`
   gap: 1rem;
   grid-template-columns: 1fr;
   justify-self: center;
+  align-items: stretch;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: repeat(2, 1fr);
@@ -39,7 +40,7 @@ const PriceContainer = styled.div`
 `;
 
 const SearchWrapper = styled.div`
-  grid-column: 1/5;
+  grid-column: 1/-1;
   background-color: ${({ theme }) => theme.colors.background};
   display: flex;
   flex-direction: column;
