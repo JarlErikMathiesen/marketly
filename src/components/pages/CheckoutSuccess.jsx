@@ -3,6 +3,8 @@ import { CircleCheckBig } from 'lucide-react';
 import { CardSuccess } from '../Cards';
 import { CheckoutButton } from '../../styles/buttons';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useCart } from '../../context/CartContext';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -25,6 +27,12 @@ const CheckoutSuccessCircle = styled(CircleCheckBig)`
 `;
 
 export function CheckoutSuccess() {
+  const { emptyCart } = useCart();
+
+  useEffect(() => {
+    emptyCart();
+  }, []);
+
   return (
     <PageWrapper>
       <CardSuccess>
