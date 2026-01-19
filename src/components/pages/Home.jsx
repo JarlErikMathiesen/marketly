@@ -63,10 +63,29 @@ const SearchInput = styled.input`
   }
 `;
 
-function SearchBar({ value, onChange }) {
+const SuggestionsList = styled.div`
+  display: flex;
+  padding: 5px;
+  margin: 5px;
+`;
+
+const SuggestionItem = styled.div`
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.colors.gold};
+  border-radius: 8px;
+  &:hover {
+    background: ${({ theme }) => theme.colors.gold};
+    color: black;
+  }
+`;
+
+function SearchBar({ value, onChange, suggestions, onSelect }) {
   return (
     <SearchWrapper>
       <label htmlFor="search-bar">Search</label>
+
       <SearchInput
         type="text"
         id="search-bar"
@@ -74,6 +93,19 @@ function SearchBar({ value, onChange }) {
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search products..."
       />
+
+      {value && suggestions.length > 0 && (
+        <SuggestionsList>
+          {suggestions.map((product) => (
+            <SuggestionItem
+              key={product.id}
+              onClick={() => onSelect(product.title)}
+            >
+              {product.title}
+            </SuggestionItem>
+          ))}
+        </SuggestionsList>
+      )}
     </SearchWrapper>
   );
 }
@@ -91,6 +123,8 @@ export function Home() {
   const filteredProducts = products.data.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const suggestions = filteredProducts.slice(0, 5);
 
   useEffect(() => {
     async function getData() {
@@ -115,7 +149,12 @@ export function Home() {
 
   return (
     <Grid>
-      <SearchBar value={searchTerm} onChange={setSearchTerm} />
+      <SearchBar
+        value={searchTerm}
+        onChange={setSearchTerm}
+        suggestions={suggestions}
+        onSelect={setSearchTerm}
+      />
 
       {filteredProducts.map((product) => (
         <Link
