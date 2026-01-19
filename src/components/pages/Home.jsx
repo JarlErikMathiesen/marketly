@@ -65,6 +65,7 @@ const SearchInput = styled.input`
 
 const SuggestionsList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 5px;
   margin: 5px;
 `;
