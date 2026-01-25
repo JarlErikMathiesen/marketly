@@ -39,10 +39,14 @@ export const OrderSummaryCard = styled(BaseCard)`
 export const CardText = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 16px;
   font-size: 25px;
   flex-grow: 1;
+
+  h2 {
+    margin-bottom: 0.5rem;
+    min-height: 6rem;
+  }
 `;
 
 export const CardImageWrapper = styled.div`

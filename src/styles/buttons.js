@@ -47,6 +47,11 @@ export const SubmitButton = styled(BaseButton)`
   font-size: 1rem;
 `;
 
+export const ViewItemButton = styled(SubmitButton)`
+  ${primaryButtonStyles};
+  margin-top: auto;
+`;
+
 export const QuantityButton = styled(BaseButton)`
   background: white;
   border: 1px solid #ddd;

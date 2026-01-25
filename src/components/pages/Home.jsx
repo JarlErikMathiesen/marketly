@@ -10,6 +10,7 @@ import {
 import { fetchProducts } from '../api/products';
 import { Link } from 'react-router-dom';
 import { ProductPrice, OldPrice } from '../../styles/fonts';
+import { ViewItemButton } from '../../styles/buttons';
 
 const Grid = styled.div`
   margin: 3rem;
@@ -122,7 +123,7 @@ export function Home() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredProducts = products.data.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    product.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const suggestions = filteredProducts.slice(0, 5);
@@ -175,6 +176,7 @@ export function Home() {
 
             <CardText>
               <h2>{product.title}</h2>
+
               {product.price !== product.discountedPrice ? (
                 <PriceContainer>
                   <OldPrice>{product.price} kr</OldPrice>
@@ -183,6 +185,7 @@ export function Home() {
               ) : (
                 <ProductPrice>{product.price} kr</ProductPrice>
               )}
+              <ViewItemButton>View Item</ViewItemButton>
             </CardText>
           </HomeCard>
         </Link>
