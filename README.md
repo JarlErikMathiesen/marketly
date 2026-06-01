@@ -1,5 +1,8 @@
 # Marketly
 
+![image](https://www.jarlerm.no/wp-content/uploads/2026/06/Screenshot-2026-05-16-131414.png)
+
+
 Marketly is a modern online shop built for a JavaScript Frameworks course. Browse products from the Noroff Online Shop API, search with live suggestions, view rich product details and reviews, manage a cart with discounts, and complete a checkout success flow—all in a responsive, accessible React application.
 
 ## Features
